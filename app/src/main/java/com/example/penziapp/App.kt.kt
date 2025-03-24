@@ -12,13 +12,13 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object `App.kt` {
 
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://your-api.com/") // Replace with actual API base URL
+            .baseUrl("http://localhost:5000/") // Replace with actual API base URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
