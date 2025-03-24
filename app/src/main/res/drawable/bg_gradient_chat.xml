@@ -1,0 +1,29 @@
+package example.penziapp.ui
+
+    import android.os.Bundle
+    import androidx.appcompat.app.AppCompatActivity
+    import androidx.fragment.app.Fragment
+    import example.penziapp.R
+
+    class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    // Load ChatFragment as the default view
+    if (savedInstanceState == null) {
+    loadFragment(ChatFragment())
+    }
+    }
+
+    /**
+    * Helper function to load fragments dynamically.
+    * @param fragment The fragment to be loaded.
+    */
+    private fun loadFragment(fragment: Fragment) {
+    supportFragmentManager.beginTransaction()
+    .replace(R.id.fragment_container, fragment)
+    .commit()
+    }
+    }
