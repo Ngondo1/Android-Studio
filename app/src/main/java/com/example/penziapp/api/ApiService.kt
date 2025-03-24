@@ -1,85 +1,76 @@
-import retrofit2.Response
+package com.example.penziapp.api
+
+import com.example.penziapp.data.model.MessageResponse
+import com.example.penziapp.data.model.UserDescriptionResponse
+import com.example.penziapp.data.model.MatchResponse
+import com.example.penziapp.data.model.MatchRequestsResponse
+import retrofit2.Call
 import retrofit2.http.*
 
-// API service interface to handle requests for Users, Messages, and MatchesRequest
 interface ApiService {
 
-    /**
-     * ----------------------------- USERS -----------------------------
-     * Handles user creation, registration, description submission, and other user-related tasks.
-     */
-
-    // Submit phone number to create a new user
+    // Submit phone number to create a user
     @POST("/submit_phone_number")
-    suspend fun submitPhoneNumber(@Body phoneData: Users): Response<Unit>
+    fun submitPhoneNumber(@Body phoneData: Map<String, String>): Call<Void>
 
-    // Submit user details like name, age, gender, and location
+    // Submit user details
     @POST("/submit_user_details")
-    suspend fun submitUserDetails(@Body userDetails: Users): Response<Unit>
+    fun submitUserDetails(@Body userDetails: Map<String, String>): Call<Void>
 
-    // Submit a self-description for the user's profile
+    // Submit self-description
     @POST("/submit_self_desc")
-    suspend fun submitSelfDescription(@Body descriptionData: Users): Response<Unit>
+    fun submitSelfDescription(@Body descriptionData: Map<String, String>): Call<Void>
 
-    // Submit registration details (e.g., name, age, gender)
+    // Submit registration details
     @POST("/submit_details_reg")
-    suspend fun submitDetailsReg(@Body registrationData: Users): Response<Unit>
+    fun submitDetailsReg(@Body registrationData: Map<String, String>): Call<Void>
 
+    // Submit additional form data
+    @POST("/submit_next_form")
+    fun submitNextForm(@Body formData: Map<String, String>): Call<Void>
 
-    /**
-     * ---------------------------- MESSAGES ----------------------------
-     * Manage messages, including fetching, adding, and viewing system messages.
-     */
-
-    // Fetch a message using a specific message ID (default ID is 5)
+    // Fetch a specific message
     @GET("/get_message_by_id")
-    suspend fun getMessageById(@Query("messageID") messageId: Int = 5): Response<Messages>
+    fun getMessageById(@Query("messageID") messageId: Int = 5): Call<MessageResponse>
 
-    // Fetch the first welcome message (message ID = 4)
+    // Fetch the first message (Welcome Message)
     @GET("/get_firstmessage")
-    suspend fun getFirstMessage(): Response<Messages>
+    fun getFirstMessage(): Call<MessageResponse>
 
-    // Fetch a system-defined message with message ID = 7
+    // Fetch a specific message with messageID=7
     @GET("/get_message_7")
-    suspend fun getMessage7(): Response<Messages>
+    fun getMessage7(): Call<MessageResponse>
 
-    // Add a new message (can be a system or user message)
+    // Add a new user
+    @POST("/add_user")
+    fun addUser(@Body userData: Map<String, String?>): Call<Void>
+
+    // Add a new message
     @POST("/add_message")
-    suspend fun addMessage(@Body messageData: Messages): Response<Unit>
+    fun addMessage(@Body messageData: Map<String, Any>): Call<Void>
 
+    // Fetch user description
+    @GET("/get_description")
+    fun getUserDescription(@Query("userID") userId: Int): Call<UserDescriptionResponse>
 
-    /**
-     * ------------------------- MATCHES REQUEST -------------------------
-     * Handles match requests, approvals, and retrieval of user matches.
-     */
-
-    // Retrieve potential matches for a user based on county and age bracket
+    // Get potential matches with pagination
     @GET("/get_matches")
-    suspend fun getMatches(
+    fun getMatches(
         @Query("county") county: String,
         @Query("ageBracket") ageBracket: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int
-    ): Response<List<Users>>  // Returns a list of matching user profiles
+    ): Call<MatchResponse>
 
-    // Submit a match request from one user to another
+    // Submit a match request
     @POST("/request_match")
-    suspend fun requestMatch(@Body matchData: MatchesRequest): Response<Unit>
+    fun requestMatch(@Body matchData: Map<String, String>): Call<Void>
 
-    // Approve or decline a match request using matchID
+    // Update a match request status
     @POST("/update_match_request")
-    suspend fun updateMatchRequest(@Body requestData: MatchesRequest): Response<Unit>
+    fun updateMatchRequest(@Body requestData: Map<String, Any>): Call<Void>
 
-    // Fetch all match requests for a specific user by phone number
+    // Get match requests
     @GET("/get_match_requests")
-    suspend fun getMatchRequests(@Query("phoneNo") phoneNo: String): Response<List<MatchesRequest>>
-
-    /**
-     * ------------------------- USER DESCRIPTION -------------------------
-     * Retrieve user descriptions when needed for profiles or matches.
-     */
-
-    // Fetch the user's self-description using their userID
-    @GET("/get_description")
-    suspend fun getUserDescription(@Query("userID") userId: Int): Response<Users>
+    fun getMatchRequests(@Query("phoneNo") phoneNo: String): Call<MatchRequestsResponse>
 }
