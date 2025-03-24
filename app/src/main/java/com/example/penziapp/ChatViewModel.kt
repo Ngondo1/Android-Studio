@@ -10,8 +10,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 data class ChatUiState(val messages: List<String> = emptyList())
 
+//State -  sing
+//Intentv- addMessages()
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val chatRepository: ChatRepository
@@ -19,6 +22,7 @@ class ChatViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(ChatUiState())
     val uiState: StateFlow<ChatUiState> = _uiState
+
 
     fun sendMessage(message: String) {
         val newMessages = _uiState.value.messages + "You: $message"
