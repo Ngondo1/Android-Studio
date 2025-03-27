@@ -8,6 +8,46 @@ import retrofit2.Response
 import retrofit2.http.*
 
 // Add the respective response models  for the requests according to your API
+data class MessageResponse(
+    val messageID: Int,
+    val shortCode: String,
+    val sendTime: String,
+    val phoneNo: String,
+    val message: String,
+    val messageType: String
+)
+
+data class UserDescriptionResponse(
+    val userID: Int,
+    val description: String
+)
+
+data class MatchResponse(
+    val matches: List<Match>,
+    val totalMatches: Int
+)
+
+data class Match(
+    val userID: Int,
+    val name: String,
+    val age: Int,
+    val phoneNo: String,
+    val county: String,
+    val town: String
+)
+
+data class MatchRequestsResponse(
+    val matchRequests: List<MatchRequest>
+)
+
+data class MatchRequest(
+    val matchID: Int,
+    val requesterPhoneNo: String,
+    val matchPhoneNo: String,
+    val status: String,
+    val requestTime: String
+)
+
 
 
 interface ApiService {
