@@ -1,11 +1,13 @@
 package com.example.penziapp.api
 
-import com.example.penziapp.data.model.MessageResponse
-import com.example.penziapp.data.model.UserDescriptionResponse
-import com.example.penziapp.data.model.MatchResponse
-import com.example.penziapp.data.model.MatchRequestsResponse
+//import com.example.penziapp.data.model.MessageResponse
+//import com.example.penziapp.data.model.UserDescriptionResponse
+//import com.example.penziapp.data.model.MatchResponse
+//import com.example.penziapp.data.model.MatchRequestsResponse
 import retrofit2.Call
 import retrofit2.http.*
+
+// Add the respective response models  for the requests according to your API
 
 interface ApiService {
 

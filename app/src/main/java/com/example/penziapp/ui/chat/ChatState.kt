@@ -1,7 +1,8 @@
 package com.example.penziapp.ui.chat
 
-data class ChatState(
-    val isLoading: Boolean = false,
-    val messages: List<String> = emptyList(),
-    val errorMessage: String? = null
-)
+sealed class ChatState {
+    object Idle : ChatState()
+    object Loading : ChatState()
+    data class Success<T>(val data: T) : ChatState()
+    data class Error(val message: String) : ChatState()
+}

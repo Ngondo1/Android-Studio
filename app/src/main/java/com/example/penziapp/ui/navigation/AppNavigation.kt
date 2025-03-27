@@ -6,15 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.penziapp.ui.screens.ChatScreen
-import com.example.penziapp.ui.screens.HomeScreen
-import com.example.penziapp.ui.screens.ProfileScreen
+import com.example.penziapp.ui.chat.ChatScreen
+import com.example.penziapp.ui.home.HomeScreen
+import com.example.penziapp.ui.profile.ProfileScreen
 
 // Define routes for easy management
 sealed class Screen(val route: String) {
-    object Home : Screen("home")
-    object Chat : Screen("chat")
-    object Profile : Screen("profile")
+    data object Home : Screen("home")
+    data object Chat : Screen("chat")
+    data object Profile : Screen("profile")
 }
 
 @Composable

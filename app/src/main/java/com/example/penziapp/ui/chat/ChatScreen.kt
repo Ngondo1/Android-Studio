@@ -8,17 +8,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.penziapp.data.model.ApiState
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+
+//Note we are using hiltViewmodel and not viewmodel
 
 @Composable
-fun ChatScreen(
-    viewModel: ChatViewModel = viewModel()
-) {
+fun ChatScreen( navController: NavController, viewModel: ChatViewModel = hiltViewModel(),) {
     val context = LocalContext.current
-    val apiState by viewModel.apiState.collectAsState()
+    val chatState by viewModel.chatState.collectAsState()
 
     // UI State variables
     var phoneNumber by remember { mutableStateOf("") }
@@ -65,7 +64,7 @@ fun ChatScreen(
 
         // Submit Button
         Button(onClick = {
-            viewModel.submitPhoneNumber(mapOf("phoneNo" to phoneNumber))
+            viewModel.handleIntent(ChatIntent.SubmitPhoneNumber(mapOf("phoneNo" to phoneNumber)))
         }) {
             Text("Submit Phone Number")
         }
@@ -73,25 +72,21 @@ fun ChatScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(onClick = {
-            viewModel.addMessage(mapOf("phoneNo" to phoneNumber, "message" to message))
+            viewModel.handleIntent(ChatIntent.AddMessage(mapOf("phoneNo" to phoneNumber, "message" to message)))
         }) {
             Text("Send Message")
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Display API State
-        when (apiState) {
-            is ApiState.Idle -> Text("Waiting for input...")
-            is ApiState.Loading -> CircularProgressIndicator()
-            is ApiState.Success -> Text("Success: ${(apiState as ApiState.Success).message}")
-            is ApiState.Error -> Text("Error: ${(apiState as ApiState.Error).error}", color = Color.Red)
+        // Display Chat State
+        when (chatState) {
+            is ChatState.Idle -> Text("Waiting for input...")
+            is ChatState.Loading -> CircularProgressIndicator()
+            is ChatState.Success<*> -> Text("Success: \${(chatState as ChatState.Success<*>).data}")
+            is ChatState.Error -> Text("Error: \${(chatState as ChatState.Error).message}", color = Color.Red)
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ChatScreenPreview() {
-    ChatScreen()
-}
+

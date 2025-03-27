@@ -1,4 +1,4 @@
-package com.example.penziapp.ui.screens
+package com.example.penziapp.ui.home
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button

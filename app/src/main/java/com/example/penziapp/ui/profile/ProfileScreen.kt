@@ -1,4 +1,4 @@
-package com.example.penziapp.ui.screens
+package com.example.penziapp.ui.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun ChatScreen(navController: NavController) {
+fun ProfileScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -20,7 +20,7 @@ fun ChatScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Chat Screen (Placeholder)")
+        Text(text = "Profile Screen (Placeholder)")
 
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -32,6 +32,6 @@ fun ChatScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun ChatScreenPreview() {
-    ChatScreen(navController = rememberNavController())
+fun ProfileScreenPreview() {
+    ProfileScreen(navController = rememberNavController())
 }
