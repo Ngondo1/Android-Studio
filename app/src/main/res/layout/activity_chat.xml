@@ -3,15 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.chat.ChatActivity">
+    android:layout_height="match_parent">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chatToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimarySurface"
         android:title="Chat"
         app:titleTextColor="@android:color/white"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,10 +36,11 @@
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="Type a message..."
+            android:layout_weight="1"
             android:backgroundTint="@android:color/darker_gray"
+            android:hint="Type a message..."
+            android:minHeight="48dp"
             android:padding="8dp"
             android:textSize="16sp" />
 
@@ -58,4 +57,3 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
