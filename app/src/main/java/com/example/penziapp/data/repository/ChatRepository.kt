@@ -1,6 +1,7 @@
 package com.example.penziapp.data.repository
 
 import com.example.penziapp.api.ApiService
+import com.example.penziapp.api.UserDetailsRequest
 import com.example.penziapp.ui.chat.ChatState
 import retrofit2.Response
 import javax.inject.Inject
@@ -13,7 +14,7 @@ class ChatRepository @Inject constructor(private val apiService: ApiService) {
     }
 
     // Submit User Details
-    suspend fun submitUserDetails(userDetails: Map<String, String>): ChatState {
+    suspend fun submitUserDetails(userDetails: UserDetailsRequest): ChatState {
         return safeApiCall { apiService.submitUserDetails(userDetails) }
     }
 

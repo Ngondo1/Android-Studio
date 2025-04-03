@@ -1,5 +1,6 @@
 package com.example.penziapp.di
 
+
 import com.example.penziapp.api.ApiService
 import com.example.penziapp.data.repository.ChatRepository
 import dagger.Module
@@ -38,7 +39,7 @@ object AppModule {
     @Provides
     fun provideApiService(): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:5000")
+            .baseUrl("http://192.168.5.19:5000")
             .client(provideOkhttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

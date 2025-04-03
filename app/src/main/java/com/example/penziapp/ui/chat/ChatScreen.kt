@@ -83,8 +83,8 @@ fun ChatScreen( navController: NavController, viewModel: ChatViewModel = hiltVie
         when (chatState) {
             is ChatState.Idle -> Text("Waiting for input...")
             is ChatState.Loading -> CircularProgressIndicator()
-            is ChatState.Success<*> -> Text("Success: \${(chatState as ChatState.Success<*>).data}")
-            is ChatState.Error -> Text("Error: \${(chatState as ChatState.Error).message}", color = Color.Red)
+            is ChatState.Success<*> -> Text("Success: ${(chatState as ChatState.Success<*>).data}")
+            is ChatState.Error -> Text("Error: ${(chatState as ChatState.Error).message}", color = Color.Red)
         }
     }
 }
