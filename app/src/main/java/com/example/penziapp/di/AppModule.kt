@@ -39,7 +39,7 @@ object AppModule {
     @Provides
     fun provideApiService(): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.5.19:5000")
+            .baseUrl("http://192.168.5.158 :5000")
             .client(provideOkhttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

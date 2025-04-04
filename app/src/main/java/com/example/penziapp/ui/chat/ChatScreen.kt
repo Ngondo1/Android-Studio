@@ -11,6 +11,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.penziapp.api.MessageRequest
+import com.example.penziapp.api.PhoneNumberRequest
 
 //Note we are using hiltViewmodel and not viewmodel
 
@@ -64,15 +66,27 @@ fun ChatScreen( navController: NavController, viewModel: ChatViewModel = hiltVie
 
         // Submit Button
         Button(onClick = {
-            viewModel.handleIntent(ChatIntent.SubmitPhoneNumber(mapOf("phoneNo" to phoneNumber)))
+            viewModel.handleIntent(ChatIntent.SubmitPhoneNumber(PhoneNumberRequest(phoneNo = phoneNumber)))
         }) {
             Text("Submit Phone Number")
         }
 
+
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(onClick = {
-            viewModel.handleIntent(ChatIntent.AddMessage(mapOf("phoneNo" to phoneNumber, "message" to message)))
+            viewModel.handleIntent(
+                ChatIntent.AddMessage(
+                    MessageRequest(
+                        messageID = 0,  // Replace with actual logic for messageID
+                        shortCode = "SMS", // Adjust accordingly
+                        sendTime = System.currentTimeMillis().toString(), // Example timestamp
+                        phoneNo = phoneNumber,
+                        message = message,
+                        messageType = "text" // Adjust based on your use case
+                    )
+                )
+            )
         }) {
             Text("Send Message")
         }

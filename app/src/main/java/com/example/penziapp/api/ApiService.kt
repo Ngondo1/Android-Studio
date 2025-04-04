@@ -1,5 +1,6 @@
 package com.example.penziapp.api
 
+import com.example.penziapp.ui.chat.ChatIntent
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -54,7 +55,7 @@ interface ApiService {
     suspend fun requestMatch(@Body request: MatchRequest): Response<GenericResponse>
 
     @POST("/update_match_request")
-    suspend fun updateMatchRequest(@Body request: UpdateMatchRequest): Response<GenericResponse>
+    suspend fun updateMatchRequest(@Body request: ChatIntent.UpdateMatchRequest): Response<GenericResponse>
 
     @GET("/get_match_requests")
     suspend fun getMatchRequests(@Query("phoneNo") phoneNo: String): Response<MatchRequestsResponse>

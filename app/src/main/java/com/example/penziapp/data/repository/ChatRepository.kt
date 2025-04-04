@@ -1,7 +1,15 @@
 package com.example.penziapp.data.repository
 
+import com.example.penziapp.api.AddUserRequest
 import com.example.penziapp.api.ApiService
+import com.example.penziapp.api.MatchRequest
+import com.example.penziapp.api.MessageRequest
+import com.example.penziapp.api.NextFormRequest
+import com.example.penziapp.api.PhoneNumberRequest
+import com.example.penziapp.api.RegistrationRequest
+import com.example.penziapp.api.SelfDescriptionRequest
 import com.example.penziapp.api.UserDetailsRequest
+import com.example.penziapp.ui.chat.ChatIntent
 import com.example.penziapp.ui.chat.ChatState
 import retrofit2.Response
 import javax.inject.Inject
@@ -9,7 +17,7 @@ import javax.inject.Inject
 class ChatRepository @Inject constructor(private val apiService: ApiService) {
 
     // Submit Phone Number
-    suspend fun submitPhoneNumber(phoneData: Map<String, String>): ChatState {
+    suspend fun submitPhoneNumber(phoneData: PhoneNumberRequest): ChatState {
         return safeApiCall { apiService.submitPhoneNumber(phoneData) }
     }
 
@@ -19,17 +27,17 @@ class ChatRepository @Inject constructor(private val apiService: ApiService) {
     }
 
     // Submit Self Description
-    suspend fun submitSelfDescription(descriptionData: Map<String, String>): ChatState {
+    suspend fun submitSelfDescription(descriptionData: SelfDescriptionRequest): ChatState {
         return safeApiCall { apiService.submitSelfDescription(descriptionData) }
     }
 
     // Submit Registration Details
-    suspend fun submitDetailsReg(registrationData: Map<String, String>): ChatState {
+    suspend fun submitDetailsReg(registrationData: RegistrationRequest): ChatState {
         return safeApiCall { apiService.submitDetailsReg(registrationData) }
     }
 
     // Submit Additional Form Data
-    suspend fun submitNextForm(formData: Map<String, String>): ChatState {
+    suspend fun submitNextForm(formData: NextFormRequest): ChatState {
         return safeApiCall { apiService.submitNextForm(formData) }
     }
 
@@ -49,18 +57,18 @@ class ChatRepository @Inject constructor(private val apiService: ApiService) {
     }
 
     // Add New User
-    suspend fun addUser(userData: Map<String, String?>): ChatState {
+    suspend fun addUser(userData: AddUserRequest): ChatState {
         return safeApiCall { apiService.addUser(userData) }
     }
 
     // Add New Message
-    suspend fun addMessage(messageData: Map<String, Any>): ChatState {
+    suspend fun addMessage(messageData: MessageRequest): ChatState {
         return safeApiCall { apiService.addMessage(messageData) }
     }
 
     // Fetch User Description
-    suspend fun getUserDescription(userId: Int): ChatState {
-        return safeApiCall { apiService.getUserDescription(userId) }
+    suspend fun getUserDescription(userId: String): ChatState {
+        return safeApiCall { apiService.getDescription(userId) }
     }
 
     // Get Matches with Pagination
@@ -69,12 +77,12 @@ class ChatRepository @Inject constructor(private val apiService: ApiService) {
     }
 
     // Submit Match Request
-    suspend fun requestMatch(matchData: Map<String, String>): ChatState {
+    suspend fun requestMatch(matchData: MatchRequest): ChatState {
         return safeApiCall { apiService.requestMatch(matchData) }
     }
 
     // Update Match Request Status
-    suspend fun updateMatchRequest(requestData: Map<String, Any>): ChatState {
+    suspend fun updateMatchRequest(requestData: ChatIntent.UpdateMatchRequest): ChatState {
         return safeApiCall { apiService.updateMatchRequest(requestData) }
     }
 
